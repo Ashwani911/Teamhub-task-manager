@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme {
+  --animate-fade-in: fade-in 0.45s ease-out both;
+  --animate-slide-up: slide-up 0.5s cubic-bezier(.22,1,.36,1) both;
+  --animate-scale-up: scale-up 0.35s cubic-bezier(.22,1,.36,1) both;
+  --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scale-up {
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  @keyframes pulse-glow {
+    0%,100% { box-shadow: 0 0 0 0 rgba(99,102,241,0); }
+    50%     { box-shadow: 0 0 20px 4px rgba(99,102,241,0.25); }
+  }
+}
+
+/* Reusable card-hover lift */
+.card-hover {
+  transition: all 0.3s cubic-bezier(.22,1,.36,1);
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px -6px rgba(99,102,241,0.18), 0 6px 10px -4px rgba(99,102,241,0.08);
+}
+
+/* Glass card style */
+.glass {
+  background: rgba(30,32,44,0.55);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.25); border-radius: 100px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(99,102,241,0.45); }
+
+/* Animated gradient background for login */
+.animated-bg {
+  background: linear-gradient(-45deg, #0f172a, #1e1b4b, #0f172a, #0c4a6e);
+  background-size: 400% 400%;
+  animation: gradientShift 12s ease infinite;
+}
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Tooltip on hover */
+.tooltip-wrap { position: relative; }
+.tooltip-wrap::after {
+  content: attr(data-tip);
+  position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%) scale(0.9);
+  padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 500;
+  white-space: nowrap; background: #312e81; color: #c7d2fe;
+  opacity: 0; pointer-events: none;
+  transition: all 0.2s cubic-bezier(.22,1,.36,1);
+}
+.tooltip-wrap:hover::after {
+  opacity: 1; transform: translateX(-50%) scale(1);
+}
